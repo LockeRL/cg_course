@@ -1,0 +1,33 @@
+[versions]
+# project
+gradleVersion = "7.4.2"
+kotlinPluginVersion = "1.7.10"
+
+# app
+coreKtxVersion = "1.8.0"
+appcompatVersion = "1.6.1"
+materialVersion = "1.9.0"
+constraintLayoutVersion = "2.0.4"
+junitVersion = "4.13.2"
+extJunitVersion = "1.1.5"
+esspressoCoreVersion = "3.5.1"
+activityKtxVersion = "1.7.2"
+kotlinStdlibJdk7Version = "1.8.0"
+kotlinStdlibJdk8Version = "1.8.0"
+
+[libraries]
+# project
+buildGradle = { module = "com.android.tools.build:gradle", version.ref = "gradleVersion" }
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinPluginVersion" }
+
+# app
+coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
+appcompat = {module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
+material = {module = "com.google.android.material:material", version.ref = "materialVersion" }
+constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayoutVersion" }
+junit = { module = "junit:junit", version.ref = "junitVersion" }
+extJunit = { module = "androidx.test.ext:junit", version.ref = "extJunitVersion" }
+esspressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "esspressoCoreVersion" }
+activityKtx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtxVersion" }
+kotlinStdlibJdk7 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlinStdlibJdk7Version" }
+kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinStdlibJdk8Version" }
