@@ -1,8 +1,8 @@
 package com.example.viewer.renderer.scene.base
 
 import com.example.viewer.renderer.math.Vector3D
-import com.example.viewer.renderer.scene.Material
-import com.example.viewer.renderer.scene.MaterialColor
+import com.example.viewer.renderer.scene.material.Material
+import com.example.viewer.renderer.scene.material.MaterialColor
 
 abstract class BaseFigure(position: Vector3D, var color: MaterialColor, var material: Material) :
     BaseObject(position) {

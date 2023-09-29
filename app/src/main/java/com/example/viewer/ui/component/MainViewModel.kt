@@ -1,13 +1,12 @@
 package com.example.viewer.ui.component
 
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import androidx.core.graphics.createBitmap
 import com.example.viewer.renderer.math.Vector3D
-import com.example.viewer.renderer.scene.Controller
-import com.example.viewer.renderer.scene.Material
-import com.example.viewer.renderer.scene.MaterialColor
+import com.example.viewer.renderer.Controller
+import com.example.viewer.renderer.scene.material.Material
+import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.objects.Camera
 import com.example.viewer.renderer.scene.objects.Light
 import com.example.viewer.renderer.scene.objects.figure.Sphere
@@ -25,11 +24,10 @@ class MainViewModel : BaseViewModel() {
     private val controller = Controller()
 
     fun initCanvas(width: Int, height: Int) {
-//        val canvasWidth = (width * widthPercent).toInt()
-//        val canvasHeight = (height * heightPercent).toInt()
+        val canvasWidth = (width * widthPercent).toInt()
+        val canvasHeight = (height * heightPercent).toInt()
 //        _canvas.value = createBitmap(5, 5)
-//        _canvas.value = createBitmap(canvasWidth, canvasHeight)
-        _canvas.value = createBitmap(width, height)
+        _canvas.value = createBitmap(canvasWidth, canvasHeight)
     }
 
     fun change() {
@@ -45,27 +43,29 @@ class MainViewModel : BaseViewModel() {
         _canvas.value = buf
     }
 
-    fun act() {
+    suspend fun act() {
         val sphere = Sphere(
-            400.0,
+            300.0,
             Vector3D(),
             MaterialColor(250, 30, 30),
             Material(1.0, 5.0, 5.0, 10.0, 0.0, 10.0)
         )
         controller.addObject(sphere)
-//        val triangle = Triangle(
-//            Vector3D(-700.0, -700.0, -130.0),
-//            Vector3D(700.0, -700.0, -130.0),
-//            Vector3D(0.0, 400.0, -130.0),
-//            MaterialColor(100, 255, 30),
-//            Material(1.0, 6.0, 0.0, 2.0, 0.0, 0.0)
-//        )
-//        controller.addObject(triangle)
+        val triangle = Triangle(
+            Vector3D(-700.0, -700.0, -130.0),
+            Vector3D(700.0, -700.0, -130.0),
+            Vector3D(0.0, 400.0, -130.0),
+            MaterialColor(100, 255, 30),
+            Material(1.0, 6.0, 0.0, 2.0, 0.0, 0.0)
+        )
+        controller.addObject(triangle)
         val light = Light(Vector3D(-300.0, 300.0, 300.0), MaterialColor(255, 255, 255))
         controller.addLight(light)
         val camera = Camera(Vector3D(0.0, 500.0, 0.0), -1.57, 0.0, 3.14, 320.0)
         controller.addCamera(camera)
-        controller.setBgColor(MaterialColor(200, 100, 100))
+        controller.setBgColor(MaterialColor(200, 200, 50))
+//        controller.setBgColor(MaterialColor(255, 255, 255))
+
         val tmp = _canvas.value!!
         controller.renderScene(tmp)
         _canvas.value = tmp

@@ -3,10 +3,9 @@ package com.example.viewer.renderer.scene.objects.figure
 import com.example.viewer.renderer.math.Vector3D
 import com.example.viewer.renderer.math.Vector3D.Companion.crossProduct
 import com.example.viewer.renderer.math.Vector3D.Companion.vecFromPoints
-import com.example.viewer.renderer.scene.Material
-import com.example.viewer.renderer.scene.MaterialColor
+import com.example.viewer.renderer.scene.material.Material
+import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.base.BaseFigure
-import java.text.FieldPosition
 
 
 class Triangle(

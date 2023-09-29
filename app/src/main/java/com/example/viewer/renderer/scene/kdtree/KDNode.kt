@@ -1,6 +1,7 @@
 package com.example.viewer.renderer.scene.kdtree
 
 import com.example.viewer.renderer.scene.base.BaseFigure
+import com.example.viewer.renderer.scene.kdtree.data.Plane
 
 class KDNode {
     var left: KDNode? = null

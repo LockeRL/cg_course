@@ -1,9 +1,13 @@
 package com.example.viewer.renderer.scene.kdtree
 
 import com.example.viewer.renderer.math.Vector3D
-import com.example.viewer.renderer.scene.Tracer
 import com.example.viewer.renderer.scene.base.BaseFigure
+import com.example.viewer.renderer.scene.kdtree.data.FindIntersectionNodeAnswer
+import com.example.viewer.renderer.scene.kdtree.data.FindPlaneAnswer
+import com.example.viewer.renderer.scene.kdtree.data.Plane
+import com.example.viewer.renderer.scene.kdtree.data.Voxel
 import com.example.viewer.renderer.toInt
+import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
 
@@ -51,9 +55,9 @@ object KDTreeController {
             yMin = min(yMin, minP.y)
             zMin = min(zMin, minP.z)
 
-            xMax = min(xMax, maxP.x)
-            yMax = min(yMax, maxP.y)
-            zMax = min(zMax, maxP.z)
+            xMax = max(xMax, maxP.x)
+            yMax = max(yMax, maxP.y)
+            zMax = max(zMax, maxP.z)
         }
 
         return Voxel(xMin - 1.0, yMin - 1.0, zMin - 1.0, xMax + 1.0, yMax + 1.0, zMax + 1.0)

@@ -1,7 +1,9 @@
-#Fri Sep 29 02:44:48 MSK 2023
+#Sat Sep 30 00:00:07 MSK 2023
 base.0=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.11=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.12=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
 base.2=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
 base.3=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
 base.4=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
@@ -13,6 +15,8 @@ base.9=E\:\\Cg\\Viewer\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDe
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=2/classes.dex
+path.11=3/classes.dex
+path.12=6/classes.dex
 path.2=11/classes.dex
 path.3=1/classes.dex
 path.4=7/classes.dex
@@ -24,6 +28,8 @@ path.9=5/classes.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.10=classes11.dex
+renamed.11=classes12.dex
+renamed.12=classes13.dex
 renamed.2=classes3.dex
 renamed.3=classes4.dex
 renamed.4=classes5.dex

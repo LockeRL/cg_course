@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.runBlocking
 
 
 class MainActivity : BaseActivity() {
@@ -35,7 +36,7 @@ class MainActivity : BaseActivity() {
 
         binding.button.setOnClickListener {
 //            viewModel.change()
-            viewModel.act()
+            runBlocking { viewModel.act() }
         }
 
 
