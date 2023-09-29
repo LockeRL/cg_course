@@ -1,33 +1,56 @@
 package com.example.viewer.renderer.scene
 
-import com.example.viewer.renderer.scene.camera.Camera
-import com.example.viewer.renderer.scene.light.Light
-import com.example.viewer.renderer.scene.model.Model
-import java.util.Vector
+import com.example.viewer.renderer.scene.base.BaseFigure
+import com.example.viewer.renderer.scene.kdtree.KDTree
+import com.example.viewer.renderer.scene.kdtree.Voxel
+import com.example.viewer.renderer.scene.objects.Camera
+import com.example.viewer.renderer.scene.objects.Light
 
 class Scene() {
-    var camera = Camera()
-    var light = Light()
-    private val models: Vector<Model> = Vector()
+    val objects: MutableList<BaseFigure> = mutableListOf()
+    val lights: MutableList<Light> = mutableListOf()
+    val cameras: MutableList<Camera> = mutableListOf()
 
-    fun countModels() = models.size
+    var tree: KDTree? = null
 
-    fun getModel(id: Int): Model = models[id]
+    var bgColor = MaterialColor()
 
-    fun setModel(model: Model, id: Int) {
-        models[id] = model
+    fun addObject(fig: BaseFigure) {
+        objects.add(fig)
     }
 
-    fun addModel(model: Model) {
-        models.addElement(model)
+    fun deleteObject(id: Int) {
+        objects.removeAt(id)
     }
 
-    fun deleteModel(id: Int) {
-        models.removeAt(id)
+    fun clearObjects() {
+        objects.clear()
     }
 
-    fun deleteAllModels() {
-        models.clear()
+    fun addLight(light: Light) {
+        lights.add(light)
     }
+
+    fun deleteLight(id: Int) {
+        lights.removeAt(id)
+    }
+
+    fun clearLights() {
+        lights.clear()
+    }
+
+    fun addCamera(camera: Camera) {
+        cameras.add(camera)
+    }
+
+    fun deleteCamera(id: Int) {
+        cameras.removeAt(id)
+    }
+
+    fun clearCameras() {
+        cameras.clear()
+    }
+
+    fun getCamera(id: Int) = cameras[id]
 
 }

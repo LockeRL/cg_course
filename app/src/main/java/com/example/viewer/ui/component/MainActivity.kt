@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
 
 
         binding.button.setOnClickListener {
-            viewModel.change()
+//            viewModel.change()
             viewModel.act()
         }
 

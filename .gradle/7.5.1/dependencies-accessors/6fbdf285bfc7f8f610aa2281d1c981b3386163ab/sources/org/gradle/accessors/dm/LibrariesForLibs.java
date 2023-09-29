@@ -89,7 +89,7 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
         public Provider<MinimalExternalModuleDependency> getKotlinStdlibJdk7() { return create("kotlinStdlibJdk7"); }
 
         /**
-         * Creates a dependency provider for kotlinStdlibJdk8 (org.jetbrains.kotlin:kotlin-stdlib-jdk7)
+         * Creates a dependency provider for kotlinStdlibJdk8 (org.jetbrains.kotlin:kotlin-stdlib-jdk8)
          * This dependency was declared in catalog libs.versions.toml
          */
         public Provider<MinimalExternalModuleDependency> getKotlinStdlibJdk8() { return create("kotlinStdlibJdk8"); }

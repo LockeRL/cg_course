@@ -5,7 +5,6 @@ import android.graphics.Color
 
 class MaterialColor(var red: Int = 0, var green: Int = 0, var blue: Int = 0) {
 
-
     operator fun plusAssign(other: MaterialColor) {
         red = componentPlus(red, other.red)
         green = componentPlus(green, other.green)
@@ -66,7 +65,7 @@ class MaterialColor(var red: Int = 0, var green: Int = 0, var blue: Int = 0) {
 
 
     private fun componentTimesInt(src: Int, other: Int): Int {
-        return minOf(src * other / MAX_COMPONENT_VAL, MAX_COMPONENT_VAL)
+        return minOf(src * other / (MAX_COMPONENT_VAL + 1), MAX_COMPONENT_VAL)
     }
 
     private fun componentTimesFloat(src: Int, other: Double): Int {
@@ -78,13 +77,12 @@ class MaterialColor(var red: Int = 0, var green: Int = 0, var blue: Int = 0) {
     }
 
     private fun componentMinus(src: Int, other: Int): Int {
-        return minOf(src - other, MIN_COMPONENT_VAL)
+        return maxOf(src - other, MIN_COMPONENT_VAL)
     }
 
     companion object {
         private const val MAX_COMPONENT_VAL = 255
         private const val MIN_COMPONENT_VAL = 0
-        const val BLACK = 0
     }
 
 }

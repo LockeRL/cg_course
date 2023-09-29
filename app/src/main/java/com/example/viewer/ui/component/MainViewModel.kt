@@ -1,21 +1,20 @@
 package com.example.viewer.ui.component
 
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
-import android.widget.ImageView
 import androidx.core.graphics.createBitmap
-import androidx.lifecycle.viewModelScope
+import com.example.viewer.renderer.math.Vector3D
+import com.example.viewer.renderer.scene.Controller
+import com.example.viewer.renderer.scene.Material
 import com.example.viewer.renderer.scene.MaterialColor
-import com.example.viewer.renderer.scene.model.data.Material
-import com.example.viewer.renderer.scene.model.data.ModelAttributes
-import com.example.viewer.renderer.scene.render.RenderWidget
+import com.example.viewer.renderer.scene.objects.Camera
+import com.example.viewer.renderer.scene.objects.Light
+import com.example.viewer.renderer.scene.objects.figure.Sphere
+import com.example.viewer.renderer.scene.objects.figure.Triangle
 import com.example.viewer.ui.base.BaseViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.fold
-import kotlinx.coroutines.launch
 
 
 class MainViewModel : BaseViewModel() {
@@ -23,10 +22,14 @@ class MainViewModel : BaseViewModel() {
     private val _canvas: MutableStateFlow<Bitmap?> = MutableStateFlow(null)
     val canvas: StateFlow<Bitmap?> = _canvas
 
+    private val controller = Controller()
+
     fun initCanvas(width: Int, height: Int) {
-        val canvasWidth = (width * widthPercent).toInt()
-        val canvasHeight = (height * heightPercent).toInt()
-        _canvas.value = createBitmap(canvasWidth, canvasHeight)
+//        val canvasWidth = (width * widthPercent).toInt()
+//        val canvasHeight = (height * heightPercent).toInt()
+//        _canvas.value = createBitmap(5, 5)
+//        _canvas.value = createBitmap(canvasWidth, canvasHeight)
+        _canvas.value = createBitmap(width, height)
     }
 
     fun change() {
@@ -43,12 +46,29 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun act() {
-        val buf = _canvas.value!!
-        val renderWidget = RenderWidget(canvas.value!!.width, canvas.value!!.height, buf)
-        renderWidget.addModel(ModelAttributes(0.0, 50.0, 300.0, 6),
-            Material(MaterialColor(66, 255, 0), MaterialColor(255, 255, 255), 256))
-        renderWidget.test()
-        _canvas.value = buf
+        val sphere = Sphere(
+            400.0,
+            Vector3D(),
+            MaterialColor(250, 30, 30),
+            Material(1.0, 5.0, 5.0, 10.0, 0.0, 10.0)
+        )
+        controller.addObject(sphere)
+//        val triangle = Triangle(
+//            Vector3D(-700.0, -700.0, -130.0),
+//            Vector3D(700.0, -700.0, -130.0),
+//            Vector3D(0.0, 400.0, -130.0),
+//            MaterialColor(100, 255, 30),
+//            Material(1.0, 6.0, 0.0, 2.0, 0.0, 0.0)
+//        )
+//        controller.addObject(triangle)
+        val light = Light(Vector3D(-300.0, 300.0, 300.0), MaterialColor(255, 255, 255))
+        controller.addLight(light)
+        val camera = Camera(Vector3D(0.0, 500.0, 0.0), -1.57, 0.0, 3.14, 320.0)
+        controller.addCamera(camera)
+        controller.setBgColor(MaterialColor(200, 100, 100))
+        val tmp = _canvas.value!!
+        controller.renderScene(tmp)
+        _canvas.value = tmp
     }
 
     private companion object {
