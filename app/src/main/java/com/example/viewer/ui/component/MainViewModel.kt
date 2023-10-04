@@ -48,15 +48,15 @@ class MainViewModel : BaseViewModel() {
             300.0,
             Vector3D(),
             MaterialColor(250, 30, 30),
-            Material(1.0, 5.0, 5.0, 10.0, 0.0, 10.0)
+            Material(1.0, 5.0, 5.0, 10.0, 10.0)
         )
         controller.addObject(sphere)
         val triangle = Triangle(
-            Vector3D(-700.0, -700.0, -130.0),
-            Vector3D(700.0, -700.0, -130.0),
-            Vector3D(0.0, 400.0, -130.0),
+            Vector3D(-700.0, -700.0, -200.0),
+            Vector3D(700.0, -700.0, -200.0),
+            Vector3D(0.0, 400.0, -200.0),
             MaterialColor(100, 255, 30),
-            Material(1.0, 6.0, 0.0, 2.0, 0.0, 0.0)
+            Material(1.0, 6.0, 0.0, 2.0, 0.0)
         )
         controller.addObject(triangle)
         val light = Light(Vector3D(-300.0, 300.0, 300.0), MaterialColor(255, 255, 255))

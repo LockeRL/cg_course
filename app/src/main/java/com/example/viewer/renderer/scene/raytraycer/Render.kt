@@ -16,21 +16,16 @@ object Render {
         val dx = width / 2
         val dy = height / 2
         val focus = camera.projPlaneDist
+        for (i in 0 until width)
+            for (j in 0 until height) {
+                    val x = i - dx
+                    val y = j - dy
 
-        coroutineScope {
-            for (i in 0 until width)
-                for (j in 0 until height) {
-                    launch {
-                        val x = i - dx
-                        val y = j - dy
-
-                        val ray = Vector3D(x.toDouble(), y.toDouble(), focus)
-                        val color = tracer.trace(scene, camera, ray)
+                    val ray = Vector3D(x.toDouble(), y.toDouble(), focus)
+                    val color = tracer.trace(scene, camera, ray)
 //                        println("pix($i, $j), color: ${color.red}, ${color.blue}, ${color.green}")
-                        canvas.setPixel(i, j, color.toArgb())
-                    }
+                    canvas.setPixel(i, j, color.toArgb())
                 }
-        }
 
         // antialising
     }

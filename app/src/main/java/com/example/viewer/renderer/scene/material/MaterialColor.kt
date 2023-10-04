@@ -2,8 +2,12 @@ package com.example.viewer.renderer.scene.material
 
 import android.graphics.Color
 
-
-class MaterialColor(var red: Int = 0, var green: Int = 0, var blue: Int = 0, var alpha: Int = MAX_COMPONENT_VAL) {
+class MaterialColor(
+    var red: Int = MIN_COMPONENT_VAL,
+    var green: Int = MIN_COMPONENT_VAL,
+    var blue: Int = MIN_COMPONENT_VAL,
+    var alpha: Int = MAX_COMPONENT_VAL
+) {
 
     operator fun plusAssign(other: MaterialColor) {
         red = componentPlus(red, other.red)
@@ -15,18 +19,6 @@ class MaterialColor(var red: Int = 0, var green: Int = 0, var blue: Int = 0, var
         red = componentPlus(red, other.red),
         green = componentPlus(green, other.green),
         blue = componentPlus(blue, other.blue)
-    )
-
-    operator fun minusAssign(other: MaterialColor) {
-        red = componentMinus(red, other.red)
-        green = componentMinus(green, other.green)
-        blue = componentMinus(blue, other.blue)
-    }
-
-    operator fun minus(other: MaterialColor) = MaterialColor(
-        red = componentMinus(red, other.red),
-        green = componentMinus(green, other.green),
-        blue = componentMinus(blue, other.blue)
     )
 
     operator fun timesAssign(other: MaterialColor) {
@@ -42,15 +34,15 @@ class MaterialColor(var red: Int = 0, var green: Int = 0, var blue: Int = 0, var
     )
 
     operator fun timesAssign(double: Double) {
-        red = componentTimesFloat(red, double)
-        green = componentTimesFloat(green, double)
-        blue = componentTimesFloat(blue, double)
+        red = componentTimesDouble(red, double)
+        green = componentTimesDouble(green, double)
+        blue = componentTimesDouble(blue, double)
     }
 
     operator fun times(double: Double) = MaterialColor(
-        red = componentTimesFloat(red, double),
-        green = componentTimesFloat(green, double),
-        blue = componentTimesFloat(blue, double)
+        red = componentTimesDouble(red, double),
+        green = componentTimesDouble(green, double),
+        blue = componentTimesDouble(blue, double)
     )
 
     fun toArgb(): Int {
@@ -63,22 +55,15 @@ class MaterialColor(var red: Int = 0, var green: Int = 0, var blue: Int = 0, var
         blue = other.blue
     }
 
-
-    private fun componentTimesInt(src: Int, other: Int): Int {
-        return minOf(src * other / (MAX_COMPONENT_VAL + 1), MAX_COMPONENT_VAL)
+    fun print() {
+        println("color: (${red}, ${green}, ${blue})")
     }
 
-    private fun componentTimesFloat(src: Int, other: Double): Int {
-        return minOf((src * other).toInt(), MAX_COMPONENT_VAL)
-    }
+    private fun componentTimesInt(src: Int, other: Int) = (src * other) shr 8
 
-    private fun componentPlus(src: Int, other: Int): Int {
-        return minOf(src + other, MAX_COMPONENT_VAL)
-    }
+    private fun componentTimesDouble(src: Int, other: Double) = (src * other).toInt()
 
-    private fun componentMinus(src: Int, other: Int): Int {
-        return maxOf(src - other, MIN_COMPONENT_VAL)
-    }
+    private fun componentPlus(src: Int, other: Int) = minOf(src + other, MAX_COMPONENT_VAL)
 
     companion object {
         private const val MAX_COMPONENT_VAL = 255

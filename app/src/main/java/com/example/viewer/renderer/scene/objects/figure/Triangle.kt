@@ -19,7 +19,7 @@ class Triangle(
     var n3: Vector3D = Vector3D()
 ) : BaseFigure(position = Vector3D(), color, material) {
     val norm = crossProduct(vecFromPoints(p1, p3), vecFromPoints(p3, p2))
-    val dist = -(p1.x * norm.x + p1.y * norm.y + p1.z * norm.z)
+    val dist = -(p1 * norm)
 
     val vP1P2 = vecFromPoints(p1, p2)
     val vP2P3 = vecFromPoints(p2, p3)

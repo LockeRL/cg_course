@@ -77,8 +77,8 @@ object KDTreeController {
         return count
     }
 
-    private fun makeLeaf(objects: List<BaseFigure>) =
-        KDNode().apply { this.objects = objects.toMutableList() }.also { println("in make leaf") }
+    private fun makeLeaf(objects: List<BaseFigure>, objectsCount: Int) =
+        KDNode().apply { this.objects = objects.take(objectsCount).toMutableList() }.also { println("in make leaf") }
 
     private fun vectorPlaneIntersection(
         vec: Vector3D,
@@ -161,7 +161,7 @@ object KDTreeController {
 
             Plane.YZ -> {
                 vl.xMax = coord
-                vl.xMin = coord
+                vr.xMin = coord
             }
 
             else -> println("Plane is None")
@@ -411,7 +411,7 @@ object KDTreeController {
         println("in rec build")
         val ans = findPlane(objects, objectsCount, vox, iter)
         if (ans.plane == Plane.NONE)
-            return makeLeaf(objects)
+            return makeLeaf(objects, objectsCount)
 
         val vl = Voxel()
         val vr = Voxel()

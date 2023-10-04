@@ -8,7 +8,6 @@ class KDNode {
     var right: KDNode? = null
 
     var objects: MutableList<BaseFigure> = mutableListOf()
-    val objectsCount get() = objects.size
 
     var coord: Double = 0.0
 
