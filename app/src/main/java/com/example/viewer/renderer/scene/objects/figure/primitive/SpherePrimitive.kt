@@ -46,6 +46,10 @@ class SpherePrimitive(var radius: Double, position: Vector3D, color: MaterialCol
     override fun getNormalVector(point: Vector3D) =
         Vector3D.vecFromPoints(position, point).apply { normalize() }
 
+    override fun move(vec: Vector3D) {
+        position += vec
+    }
+
     override fun rotate(ang: Vector3D) { }
 
 }
