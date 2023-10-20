@@ -26,6 +26,12 @@ public final class ViewerLayoutBinding implements ViewBinding {
   public final Button button;
 
   @NonNull
+  public final Button button2;
+
+  @NonNull
+  public final Button button3;
+
+  @NonNull
   public final TableLayout camera;
 
   @NonNull
@@ -38,10 +44,12 @@ public final class ViewerLayoutBinding implements ViewBinding {
   public final TableRow tabel1;
 
   private ViewerLayoutBinding(@NonNull ConstraintLayout rootView, @NonNull Button button,
-      @NonNull TableLayout camera, @NonNull ImageView canvas, @NonNull TableLayout figures,
-      @NonNull TableRow tabel1) {
+      @NonNull Button button2, @NonNull Button button3, @NonNull TableLayout camera,
+      @NonNull ImageView canvas, @NonNull TableLayout figures, @NonNull TableRow tabel1) {
     this.rootView = rootView;
     this.button = button;
+    this.button2 = button2;
+    this.button3 = button3;
     this.camera = camera;
     this.canvas = canvas;
     this.figures = figures;
@@ -81,6 +89,18 @@ public final class ViewerLayoutBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.button2;
+      Button button2 = ViewBindings.findChildViewById(rootView, id);
+      if (button2 == null) {
+        break missingId;
+      }
+
+      id = R.id.button3;
+      Button button3 = ViewBindings.findChildViewById(rootView, id);
+      if (button3 == null) {
+        break missingId;
+      }
+
       id = R.id.camera;
       TableLayout camera = ViewBindings.findChildViewById(rootView, id);
       if (camera == null) {
@@ -105,8 +125,8 @@ public final class ViewerLayoutBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ViewerLayoutBinding((ConstraintLayout) rootView, button, camera, canvas, figures,
-          tabel1);
+      return new ViewerLayoutBinding((ConstraintLayout) rootView, button, button2, button3, camera,
+          canvas, figures, tabel1);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

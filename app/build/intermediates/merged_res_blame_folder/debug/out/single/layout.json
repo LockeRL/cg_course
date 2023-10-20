@@ -2,5 +2,9 @@
     {
         "merged": "com.example.viewer.app-mergeDebugResources-38:/layout/viewer_layout.xml",
         "source": "com.example.viewer.app-main-41:/layout/viewer_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Max\\.gradle\\daemon\\7.5.1\\com.example.viewer.app-mergeDebugResources-38:\\layout\\viewer_layout.xml",
+        "source": "C:\\Users\\Max\\.gradle\\daemon\\7.5.1\\com.example.viewer.app-main-41:\\layout\\viewer_layout.xml"
     }
 ]

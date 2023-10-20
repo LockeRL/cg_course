@@ -1,5 +1,7 @@
 package com.example.viewer.renderer.math
 
+import com.example.viewer.renderer.EPS
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sqrt
 
@@ -46,6 +48,8 @@ class Vector3D(var x: Double = 0.0, var y: Double = 0.0, var z: Double = 0.0) {
 
     fun normalize() {
         val mod = module()
+        if (abs(mod) < EPS)
+            return
         x /= mod
         y /= mod
         z /= mod

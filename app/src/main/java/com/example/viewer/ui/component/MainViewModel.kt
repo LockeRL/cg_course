@@ -1,19 +1,19 @@
 package com.example.viewer.ui.component
 
 import android.graphics.Bitmap
-import android.graphics.Color
 import androidx.core.graphics.createBitmap
+import com.example.viewer.renderer.RenderController
 import com.example.viewer.renderer.math.Vector3D
-import com.example.viewer.renderer.Controller
+import com.example.viewer.renderer.SceneController
 import com.example.viewer.renderer.scene.material.Material
 import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.objects.Camera
 import com.example.viewer.renderer.scene.objects.Light
-import com.example.viewer.renderer.scene.objects.figure.Sphere
-import com.example.viewer.renderer.scene.objects.figure.Triangle
+import com.example.viewer.renderer.scene.objects.figure.complex.Cube
 import com.example.viewer.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlin.math.PI
 
 
 class MainViewModel : BaseViewModel() {
@@ -21,53 +21,67 @@ class MainViewModel : BaseViewModel() {
     private val _canvas: MutableStateFlow<Bitmap?> = MutableStateFlow(null)
     val canvas: StateFlow<Bitmap?> = _canvas
 
-    private val controller = Controller()
+    private val sceneController = SceneController
+    private val renderController = RenderController
 
     fun initCanvas(width: Int, height: Int) {
         val canvasWidth = (width * widthPercent).toInt()
         val canvasHeight = (height * heightPercent).toInt()
-//        _canvas.value = createBitmap(5, 5)
         _canvas.value = createBitmap(canvasWidth, canvasHeight)
     }
 
-    fun change() {
-        val buf = _canvas.value
-        buf?.setPixel(
-            0, 0, Color.argb(
-                (0..255).random(),
-                (0..255).random(),
-                (0..255).random(),
-                (0..255).random()
-            )
+    suspend fun act() {
+//        val sphere = Sphere(
+//            Vector3D(),
+//            300.0,
+//            MaterialColor(250, 30, 30),
+//            Material(1.0, 5.0, 5.0, 10.0, 10.0)
+//        )
+//        sceneController.addObject(sphere)
+
+        val cube = Cube(
+            Vector3D(),
+            400.0,
+            400.0,
+            400.0,
+            MaterialColor(250, 30, 30),
+            Material(4.0, 5.0, 5.0, 3.0, 10.0)
         )
-        _canvas.value = buf
+        sceneController.addObject(cube)
+
+//        val plane = Plane(
+//            Vector3D(),
+//            400.0,
+//            400.0,
+//            MaterialColor(250, 30, 30),
+//            Material(1.0, 5.0, 5.0, 10.0, 10.0)
+//        )
+//        sceneController.addObject(plane)
+
+        val light = Light(Vector3D(800.0, 800.0, 800.0), MaterialColor(255, 255, 255))
+        sceneController.addLight(light)
+        val camera = Camera(Vector3D(0.0, 400.0, 0.0), -PI / 2, 0.0, PI, 300.0)
+//        camera.rotate(z = PI / 4)
+        sceneController.addCamera(camera)
+//        controller.setBgColor(MaterialColor(62, 200, 240))
+        sceneController.setBgColor(MaterialColor(255, 255, 255))
+
+        render()
     }
 
-    suspend fun act() {
-        val sphere = Sphere(
-            300.0,
-            Vector3D(),
-            MaterialColor(250, 30, 30),
-            Material(1.0, 5.0, 5.0, 10.0, 10.0)
-        )
-        controller.addObject(sphere)
-        val triangle = Triangle(
-            Vector3D(-700.0, -700.0, -200.0),
-            Vector3D(700.0, -700.0, -200.0),
-            Vector3D(0.0, 400.0, -200.0),
-            MaterialColor(100, 255, 30),
-            Material(1.0, 6.0, 0.0, 2.0, 0.0)
-        )
-        controller.addObject(triangle)
-        val light = Light(Vector3D(-300.0, 300.0, 300.0), MaterialColor(255, 255, 255))
-        controller.addLight(light)
-        val camera = Camera(Vector3D(0.0, 500.0, 0.0), -1.57, 0.0, 3.14, 320.0)
-        controller.addCamera(camera)
-        controller.setBgColor(MaterialColor(200, 200, 50))
-//        controller.setBgColor(MaterialColor(255, 255, 255))
+    suspend fun rotateCamera() {
+        sceneController.rotate()
+        render()
+    }
 
+    suspend fun moveCamera() {
+        sceneController.move()
+        render()
+    }
+
+    private suspend fun render() {
         val tmp = _canvas.value!!
-        controller.renderScene(tmp)
+        renderController.render(tmp, sceneController.mainCamera, sceneController.scene)
         _canvas.value = tmp
     }
 

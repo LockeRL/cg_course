@@ -1,21 +1,32 @@
 package com.example.viewer.renderer.scene
 
-import com.example.viewer.renderer.scene.base.BaseFigure
+import com.example.viewer.renderer.math.Vector3D
+import com.example.viewer.renderer.scene.objects.figure.base.BasePrimitive
 import com.example.viewer.renderer.scene.kdtree.KDTree
 import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.objects.Camera
 import com.example.viewer.renderer.scene.objects.Light
+import com.example.viewer.renderer.scene.objects.figure.base.BaseComplexFigure
+import kotlin.math.PI
 
 class Scene() {
-    val objects: MutableList<BaseFigure> = mutableListOf()
+    val objects: MutableList<BaseComplexFigure> = mutableListOf()
+
+    val primitives: List<BasePrimitive>
+        get() = objects.fold(listOf()) { acc, fig ->
+            acc + fig.parts
+        }
+
     val lights: MutableList<Light> = mutableListOf()
-    val cameras: MutableList<Camera> = mutableListOf()
+
+    private val cameras: MutableList<Camera> = mutableListOf()
+    val defaultCamera = Camera(Vector3D(0.0, 400.0, 0.0), -PI / 2, 0.0, PI, 300.0)
 
     var tree: KDTree? = null
 
     var bgColor = MaterialColor()
 
-    fun addObject(fig: BaseFigure) {
+    fun addObject(fig: BaseComplexFigure) {
         objects.add(fig)
     }
 

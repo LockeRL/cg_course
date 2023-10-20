@@ -6,10 +6,12 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.viewer.databinding.ViewerLayoutBinding
 import com.example.viewer.ui.base.BaseActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -35,8 +37,18 @@ class MainActivity : BaseActivity() {
 
 
         binding.button.setOnClickListener {
-//            viewModel.change()
             runBlocking { viewModel.act() }
+        }
+
+        binding.button2.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.Default) {
+                viewModel.rotateCamera()
+            }
+            runBlocking { viewModel.rotateCamera() }
+        }
+
+        binding.button3.setOnClickListener {
+            runBlocking { viewModel.moveCamera() }
         }
 
 

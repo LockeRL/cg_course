@@ -3009,6 +3009,8 @@ int id blocking 0x7f080055
 int id bottom 0x7f080056
 int id bounce 0x7f080057
 int id button 0x7f080058
+int id button2 0x7f0801cb
+int id button3 0x7f0801cc
 int id buttonPanel 0x7f080059
 int id cache_measures 0x7f08005a
 int id camera 0x7f08005b

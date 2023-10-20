@@ -1,7 +1,7 @@
 package com.example.viewer.renderer.scene.kdtree
 
 import com.example.viewer.renderer.math.Vector3D
-import com.example.viewer.renderer.scene.base.BaseFigure
+import com.example.viewer.renderer.scene.objects.figure.base.BasePrimitive
 import com.example.viewer.renderer.scene.kdtree.data.FindIntersectionNodeAnswer
 import com.example.viewer.renderer.scene.kdtree.data.FindPlaneAnswer
 import com.example.viewer.renderer.scene.kdtree.data.Plane
@@ -13,19 +13,24 @@ import kotlin.math.sqrt
 
 object KDTreeController {
 
-    fun buildKDTree(objects: MutableList<BaseFigure>): KDTree {
+    fun buildKDTree(primitives: List<BasePrimitive>): KDTree? {
         println("in buildKDTree")
+        val objects = primitives.toMutableList()
+        if (objects.isEmpty())
+            return null
         val vox = makeInitVoxel(objects)
         val root = recBuild(objects, objects.size, vox, 0)
         return KDTree(root, vox)
     }
 
     fun findIntersectionTree(
-        tree: KDTree,
+        tree: KDTree?,
         vecStart: Vector3D,
         vec: Vector3D
     ): FindIntersectionNodeAnswer {
         val ans = FindIntersectionNodeAnswer(nearestPointDist = Double.MAX_VALUE, status = false)
+        if (tree == null)
+            return ans
         val recAnswer = findIntersectionNode(tree.root, tree.vox, vecStart, vec, ans)
         if (NO_BOUNDING_BOX)
             return recAnswer.apply { status = status && voxelIntersection(vec, vecStart, tree.vox) }
@@ -39,7 +44,7 @@ object KDTreeController {
                     (point.z > vox.zMin) && (point.z < vox.zMax)
             )
 
-    private fun makeInitVoxel(objects: List<BaseFigure>): Voxel {
+    private fun makeInitVoxel(objects: List<BasePrimitive>): Voxel {
         println("init voxel")
         if (objects.isEmpty())
             return Voxel(-1.0, -1.0, -1.0, 1.0, 1.0, 1.0)
@@ -63,21 +68,26 @@ object KDTreeController {
         return Voxel(xMin - 1.0, yMin - 1.0, zMin - 1.0, xMax + 1.0, yMax + 1.0, zMax + 1.0)
     }
 
-    private fun objectInVoxel(obj: BaseFigure, vox: Voxel): Boolean {
+    private fun objectInVoxel(obj: BasePrimitive, vox: Voxel): Boolean {
         val minP = obj.getMinBoundaryPoint()
         val maxP = obj.getMaxBoundaryPoint()
 
-        return !((maxP.x < vox.xMin) || (maxP.y < vox.yMin) || (maxP.z < vox.zMin) || (minP.x > vox.xMax) || (minP.y > vox.yMax) || (minP.z > vox.zMax))
+        return !((maxP.x < vox.xMin) ||
+                (maxP.y < vox.yMin) ||
+                (maxP.z < vox.zMin) ||
+                (minP.x > vox.xMax) ||
+                (minP.y > vox.yMax) ||
+                (minP.z > vox.zMax))
     }
 
-    private fun objectsInVoxel(objects: List<BaseFigure>, objectsCount: Int, vox: Voxel): Int {
+    private fun objectsInVoxel(objects: List<BasePrimitive>, objectsCount: Int, vox: Voxel): Int {
         var count = 0
         for (i in 0 until objectsCount)
             count += objectInVoxel(objects[i], vox).toInt()
         return count
     }
 
-    private fun makeLeaf(objects: List<BaseFigure>, objectsCount: Int) =
+    private fun makeLeaf(objects: List<BasePrimitive>, objectsCount: Int) =
         KDNode().apply { this.objects = objects.take(objectsCount).toMutableList() }.also { println("in make leaf") }
 
     private fun vectorPlaneIntersection(
@@ -185,7 +195,7 @@ object KDTreeController {
  */
 
     private fun findPlane(
-        objects: List<BaseFigure>,
+        objects: List<BasePrimitive>,
         objectsCount: Int,
         vox: Voxel,
         depth: Int
@@ -300,7 +310,7 @@ object KDTreeController {
             if (node.objects.isNotEmpty()) {
                 var intersected = false
                 var sqrNearestDist = 0.0
-                var nearestObj: BaseFigure? = null
+                var nearestObj: BasePrimitive? = null
                 var nearestIntersectionPoint: Vector3D? = null
 
                 node.objects.forEach { obj ->
@@ -390,7 +400,7 @@ object KDTreeController {
         ).apply { status = status && voxelIntersection(vec, vecStart, backVoxel) }
     }
 
-    private fun filterOverlappedObjects(objects: MutableList<BaseFigure>, objectsCount: Int, vox: Voxel): Int {
+    private fun filterOverlappedObjects(objects: MutableList<BasePrimitive>, objectsCount: Int, vox: Voxel): Int {
         var i = 0
         var j = objectsCount - 1
 
@@ -407,7 +417,7 @@ object KDTreeController {
         return i
     }
 
-    private fun recBuild(objects: MutableList<BaseFigure>, objectsCount: Int, vox: Voxel, iter: Int): KDNode {
+    private fun recBuild(objects: MutableList<BasePrimitive>, objectsCount: Int, vox: Voxel, iter: Int): KDNode {
         println("in rec build")
         val ans = findPlane(objects, objectsCount, vox, iter)
         if (ans.plane == Plane.NONE)
