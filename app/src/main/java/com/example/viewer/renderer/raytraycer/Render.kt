@@ -1,4 +1,4 @@
-package com.example.viewer.renderer.scene.raytraycer
+package com.example.viewer.renderer.raytraycer
 
 import android.graphics.Bitmap
 import com.example.viewer.renderer.math.Vector3D
@@ -32,7 +32,7 @@ object Render {
 
                     val ray = Vector3D(x.toDouble(), y.toDouble(), focus)
 //                val ray = cameraRight * mtanf * maspect * x + cameraUp * y * mtanf + view
-                    val color = tracer.trace(scene, camera, ray)
+                    val color = Tracer.trace(scene, camera, ray)
 //                        println("pix($i, $j), color: ${color.red}, ${color.blue}, ${color.green}")
                     canvas.setPixel(i, j, color.toArgb())
                 }
@@ -41,7 +41,7 @@ object Render {
     }
 
     fun buildTree(scene: Scene) {
-        tracer.buildTree(scene)
+        Tracer.buildTree(scene)
     }
 
     private const val ANTIALIASING = true

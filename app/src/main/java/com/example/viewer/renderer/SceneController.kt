@@ -6,7 +6,7 @@ import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.objects.Camera
 import com.example.viewer.renderer.scene.objects.Light
 import com.example.viewer.renderer.scene.objects.figure.base.BaseComplexFigure
-import com.example.viewer.renderer.scene.raytraycer.Render
+import com.example.viewer.renderer.raytraycer.Render
 
 object SceneController {
     val scene = Scene()

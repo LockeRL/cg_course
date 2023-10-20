@@ -1,11 +1,11 @@
-package com.example.viewer.renderer.scene.kdtree
+package com.example.viewer.renderer.raytraycer.kdtree
 
 import com.example.viewer.renderer.math.Vector3D
 import com.example.viewer.renderer.scene.objects.figure.base.BasePrimitive
-import com.example.viewer.renderer.scene.kdtree.data.FindIntersectionNodeAnswer
-import com.example.viewer.renderer.scene.kdtree.data.FindPlaneAnswer
-import com.example.viewer.renderer.scene.kdtree.data.Plane
-import com.example.viewer.renderer.scene.kdtree.data.Voxel
+import com.example.viewer.renderer.raytraycer.kdtree.data.FindIntersectionNodeAnswer
+import com.example.viewer.renderer.raytraycer.kdtree.data.FindPlaneAnswer
+import com.example.viewer.renderer.raytraycer.kdtree.data.Plane
+import com.example.viewer.renderer.raytraycer.kdtree.data.Voxel
 import com.example.viewer.renderer.toInt
 import kotlin.math.max
 import kotlin.math.min

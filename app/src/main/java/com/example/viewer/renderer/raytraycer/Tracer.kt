@@ -1,11 +1,11 @@
-package com.example.viewer.renderer.scene.raytraycer
+package com.example.viewer.renderer.raytraycer
 
 import com.example.viewer.renderer.EPS
 import com.example.viewer.renderer.math.Vector3D
 import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.Scene
 import com.example.viewer.renderer.scene.objects.figure.base.BasePrimitive
-import com.example.viewer.renderer.scene.kdtree.KDTreeController
+import com.example.viewer.renderer.raytraycer.kdtree.KDTreeController
 import com.example.viewer.renderer.scene.objects.Camera
 import kotlin.math.abs
 import kotlin.math.pow

@@ -1,4 +1,4 @@
-package com.example.viewer.renderer.scene.kdtree.data
+package com.example.viewer.renderer.raytraycer.kdtree.data
 
 data class Voxel(
     var xMin: Double = 0.0,

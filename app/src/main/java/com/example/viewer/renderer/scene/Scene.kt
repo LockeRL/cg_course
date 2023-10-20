@@ -2,7 +2,7 @@ package com.example.viewer.renderer.scene
 
 import com.example.viewer.renderer.math.Vector3D
 import com.example.viewer.renderer.scene.objects.figure.base.BasePrimitive
-import com.example.viewer.renderer.scene.kdtree.KDTree
+import com.example.viewer.renderer.raytraycer.kdtree.KDTree
 import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.objects.Camera
 import com.example.viewer.renderer.scene.objects.Light

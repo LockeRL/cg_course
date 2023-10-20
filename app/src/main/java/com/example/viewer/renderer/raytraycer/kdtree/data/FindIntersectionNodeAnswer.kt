@@ -1,4 +1,4 @@
-package com.example.viewer.renderer.scene.kdtree.data
+package com.example.viewer.renderer.raytraycer.kdtree.data
 
 import com.example.viewer.renderer.math.Vector3D
 import com.example.viewer.renderer.scene.objects.figure.base.BasePrimitive
