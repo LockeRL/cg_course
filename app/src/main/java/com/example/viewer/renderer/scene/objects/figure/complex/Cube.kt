@@ -18,14 +18,14 @@ class Cube(
 ) : BaseComplexFigure(position, color, material) {
 
     override fun createFigure(): List<BasePrimitive> {
-        val xf = position.x + length / 2 + EPS
-        val xb = position.x - length / 2 - EPS
+        val xf = position.x + length / 2
+        val xb = position.x - length / 2
 
-        val zb = position.z - height / 2 - EPS
-        val zt = position.z + height / 2 + EPS
+        val zb = position.z - height / 2
+        val zt = position.z + height / 2
 
-        val yl = position.y - width / 2 - EPS
-        val yr = position.y + width / 2 + EPS
+        val yl = position.y - width / 2
+        val yr = position.y + width / 2
 
         val b1 = Vector3D(xf, yl, zb)
         val b2 = Vector3D(xb, yl, zb)
