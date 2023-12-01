@@ -8,7 +8,7 @@ import com.example.viewer.renderer.raytraycer.Render
 object RenderController {
     private val render = Render
 
-    suspend fun render(canvas: Bitmap, camera: Camera, scene: Scene) {
+    fun render(canvas: Bitmap, camera: Camera, scene: Scene) {
         render.renderScene(scene, camera, canvas)
     }
 }

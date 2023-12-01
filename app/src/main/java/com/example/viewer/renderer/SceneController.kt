@@ -11,31 +11,27 @@ import com.example.viewer.renderer.raytraycer.Render
 object SceneController {
     val scene = Scene()
     private val render = Render
-    var mainCamera: Camera = scene.defaultCamera
+    var mainCamera: Camera = Scene.defaultCamera
 
-    fun rotate() {
-        mainCamera.rotate(z = -0.5)
-    }
-
-    fun move() {
-        mainCamera.move(Vector3D(-100.0))
+    fun changeCameraDist(d: Double) {
+        mainCamera.projPlaneDist = d
     }
 
     fun setBgColor(color: MaterialColor) {
         scene.bgColor = color
     }
 
-    fun rotateObject(id: Int, ang: Vector3D) {
-
+    fun rotateFigure(id: Int, ang: Vector3D) {
+        scene.rotateObject(id, ang)
         rebuildTree()
     }
 
-    fun moveObject(id: Int, vec: Vector3D) {
-
+    fun moveFigure(id: Int, vec: Vector3D) {
+        scene.moveObject(id, vec)
         rebuildTree()
     }
 
-    fun addObject(fig: BaseComplexFigure) {
+    fun addFigure(fig: BaseComplexFigure) {
         scene.addObject(fig)
         rebuildTree()
     }
@@ -54,6 +50,12 @@ object SceneController {
         scene.addLight(light)
     }
 
+    fun moveLight(id: Int, vec: Vector3D) {
+        scene.moveLight(id, vec)
+    }
+
+    fun rotateLight(id: Int, ang: Vector3D) {}
+
     fun deleteLight(id: Int) {
         scene.deleteLight(id)
     }
@@ -67,12 +69,23 @@ object SceneController {
     }
 
     fun deleteCamera(id: Int) {
+        if (id == 0)
+            return
         scene.deleteCamera(id)
+    }
+
+    fun rotateCamera(id: Int, ang: Vector3D) {
+        mainCamera.rotate(ang)
+    }
+
+    fun moveCamera(id: Int, vec: Vector3D) {
+        mainCamera.move(vec)
     }
 
     fun clearCameras() {
         scene.clearCameras()
-        mainCamera = scene.defaultCamera
+        mainCamera = Scene.defaultCamera
+        scene.addCamera(mainCamera)
     }
 
     fun setMainCamera(id: Int) {

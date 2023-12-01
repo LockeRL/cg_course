@@ -45,8 +45,4 @@ class Cube(
                 trianglesFromRect(b4, t4, t3, b3, color, material)
     }
 
-    override fun update() {
-
-    }
-
 }

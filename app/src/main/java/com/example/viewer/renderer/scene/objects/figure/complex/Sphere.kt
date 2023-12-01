@@ -12,6 +12,4 @@ class Sphere(position: Vector3D, var radius: Double, color: MaterialColor, mater
 
     override fun createFigure(): List<BasePrimitive> = listOf(SpherePrimitive(radius, position, color, material))
 
-    override fun update() {}
-
 }

@@ -9,6 +9,8 @@ import com.example.viewer.renderer.scene.material.MaterialColor
 import com.example.viewer.renderer.scene.objects.figure.base.BasePrimitive
 import kotlinx.coroutines.processNextEventInCurrentThread
 import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.sin
 
 
 class Triangle(
@@ -57,8 +59,10 @@ class Triangle(
         updateTriangle()
     }
 
-    override fun rotate(ang: Vector3D) {
-        TODO("Not yet implemented")
+    override fun rotate(ang: Vector3D, center: Vector3D) {
+        rotatePoint(p1, ang, center)
+        rotatePoint(p2, ang, center)
+        rotatePoint(p3, ang, center)
         updateTriangle()
     }
 
@@ -68,7 +72,6 @@ class Triangle(
     override fun getMaxBoundaryPoint() =
         Vector3D(maxOf(p1.x, p2.x, p3.x) + EPS, maxOf(p1.y, p2.y, p3.y) + EPS, maxOf(p1.z, p2.z, p3.z) + EPS)
 
-
     fun getPhongNormalVector(point: Vector3D): Vector3D {
         val (w1, w2, w3) = getWeightsOfVertexes(point)
         return Vector3D(
@@ -76,6 +79,12 @@ class Triangle(
             w1 * n1.y + w2 * n2.y + w3 * n3.y,
             w1 * n1.z + w2 * n2.z + w3 * n3.z
         )
+    }
+
+    override fun print() {
+        p1.print()
+        p2.print()
+        p3.print()
     }
 
     private fun getWeightsOfVertexes(point: Vector3D): Vector3D {
@@ -99,5 +108,14 @@ class Triangle(
 
     private fun checkSameClockDir(v1: Vector3D, v2: Vector3D) =
         crossProduct(v2, v1) * norm > 0.0
+
+    private fun rotatePoint(point: Vector3D, ang: Vector3D, center: Vector3D) {
+        if (abs(ang.x) > EPS)
+            point.rotateOX(ang.x, center)
+        if (abs(ang.y) > EPS)
+            point.rotateOY(ang.y, center)
+        if (abs(ang.z) > EPS)
+            point.rotateOZ(ang.z, center)
+    }
 
 }

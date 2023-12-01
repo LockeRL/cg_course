@@ -30,9 +30,5 @@ class Plane(
         return trianglesFromRect(p1, p2, p3, p4, color, material)
     }
 
-    override fun update() {
-        TODO("Not yet implemented")
-    }
-
 
 }

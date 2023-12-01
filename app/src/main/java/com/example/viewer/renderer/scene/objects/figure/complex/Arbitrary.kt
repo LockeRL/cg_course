@@ -13,7 +13,4 @@ class Arbitrary(position: Vector3D, color: MaterialColor, material: Material) :
         TODO("Not yet implemented")
     }
 
-    override fun update() {
-        TODO("Not yet implemented")
-    }
 }
