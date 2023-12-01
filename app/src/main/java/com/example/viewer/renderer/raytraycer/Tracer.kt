@@ -70,19 +70,12 @@ object Tracer {
             ambientColor += scene.bgColor * objColor
 
         if (material.kd > 0.0)
-            diffuseColor += if (scene.lights.isNotEmpty()) objColor * getLightingColor(
-                point,
-                norm,
-                scene
-            ) else objColor
+            diffuseColor += if (scene.lights.isNotEmpty()) objColor *
+                    getLightingColor(point, norm, scene) else objColor
 
         if (material.ks > 0.0)
-            specularColor += if (scene.lights.isNotEmpty()) getSpecularColor(
-                point,
-                reflectedRay,
-                scene,
-                material.p
-            ) else scene.bgColor
+            specularColor += if (scene.lights.isNotEmpty())
+                getSpecularColor(point, reflectedRay, scene, material.p) else scene.bgColor
 
         if (material.kr > 0.0) {
             if ((intensity > THRESHOLD_RAY_INTENSITY) && (recLevel < MAX_RAY_RECURSION_LEVEL))

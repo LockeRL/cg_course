@@ -10,5 +10,7 @@ abstract class BasePrimitive(val position: Vector3D, var color: MaterialColor, v
     abstract fun getMaxBoundaryPoint(): Vector3D
     abstract fun getNormalVector(point: Vector3D): Vector3D
     abstract fun move(vec: Vector3D)
-    abstract fun rotate(ang: Vector3D)
+    abstract fun rotate(ang: Vector3D, center: Vector3D)
+
+    abstract fun print()
 }

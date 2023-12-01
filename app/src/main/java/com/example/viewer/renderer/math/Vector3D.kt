@@ -3,6 +3,7 @@ package com.example.viewer.renderer.math
 import com.example.viewer.renderer.EPS
 import kotlin.math.abs
 import kotlin.math.cos
+import kotlin.math.sin
 import kotlin.math.sqrt
 
 class Vector3D(var x: Double = 0.0, var y: Double = 0.0, var z: Double = 0.0) {
@@ -61,6 +62,33 @@ class Vector3D(var x: Double = 0.0, var y: Double = 0.0, var z: Double = 0.0) {
         x = other.x
         y = other.y
         z = other.z
+    }
+
+    fun rotateOX(ang: Double, center: Vector3D) {
+        val dy = y - center.y
+        val dz = z - center.z
+        y = center.y + dy * cos(ang) - dz * sin(ang)
+        z = center.z + dy * sin(ang) + dz * cos(ang)
+    }
+
+    fun rotateOY(ang: Double, center: Vector3D) {
+        val dx = x - center.x
+        val dz = z - center.z
+        x = center.x + dx * cos(ang) - dz * sin(ang)
+        z = center.z + dx * sin(ang) + dz * cos(ang)
+    }
+
+    fun rotateOZ(ang: Double, center: Vector3D) {
+        val dx = x - center.x
+        val dy = y - center.y
+        x = center.x + dx * cos(ang) - dy * sin(ang)
+        y = center.y + dx * sin(ang) + dy * cos(ang)
+    }
+
+    fun copy() = Vector3D(x, y, z)
+
+    fun print() {
+        println("x: $x, y: $y, z: $z")
     }
 
     operator fun component1() = x

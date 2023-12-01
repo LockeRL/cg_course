@@ -50,6 +50,10 @@ class SpherePrimitive(var radius: Double, position: Vector3D, color: MaterialCol
         position += vec
     }
 
-    override fun rotate(ang: Vector3D) { }
+    override fun rotate(ang: Vector3D, center: Vector3D) { }
+
+    override fun print() {
+        TODO("Not yet implemented")
+    }
 
 }

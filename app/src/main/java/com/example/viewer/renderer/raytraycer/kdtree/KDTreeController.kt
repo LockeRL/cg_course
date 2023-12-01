@@ -178,7 +178,7 @@ object KDTreeController {
         }
     }
 
-    /*
+/*
  * Using Surface Area Heuristic (SAH) for finding best split pane
  *
  * SAH = 0.5 * voxel_surface_area * number_of_objects_in_voxel

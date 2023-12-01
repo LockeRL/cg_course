@@ -10,7 +10,9 @@ import com.example.viewer.renderer.scene.objects.figure.base.BaseComplexFigure
 import kotlin.math.PI
 
 class Scene() {
-    val objects: MutableList<BaseComplexFigure> = mutableListOf()
+    private val objects: MutableList<BaseComplexFigure> = mutableListOf()
+    val objectsNum: Int
+        get() = objects.size
 
     val primitives: List<BasePrimitive>
         get() = objects.fold(listOf()) { acc, fig ->
@@ -18,13 +20,17 @@ class Scene() {
         }
 
     val lights: MutableList<Light> = mutableListOf()
+    val lightsNum: Int
+        get() = lights.size
 
     private val cameras: MutableList<Camera> = mutableListOf()
-    val defaultCamera = Camera(Vector3D(0.0, 400.0, 0.0), -PI / 2, 0.0, PI, 300.0)
+    val camerasNum: Int
+        get() = cameras.size
 
     var tree: KDTree? = null
 
-    var bgColor = MaterialColor()
+    var bgColor = MaterialColor(255, 255, 255)
+
 
     fun addObject(fig: BaseComplexFigure) {
         objects.add(fig)
@@ -38,12 +44,24 @@ class Scene() {
         objects.clear()
     }
 
+    fun moveObject(id: Int, vec: Vector3D) {
+        objects[id].move(vec)
+    }
+
+    fun rotateObject(id: Int, ang: Vector3D) {
+        objects[id].rotate(ang)
+    }
+
     fun addLight(light: Light) {
         lights.add(light)
     }
 
     fun deleteLight(id: Int) {
         lights.removeAt(id)
+    }
+
+    fun moveLight(id: Int, vec: Vector3D) {
+        lights[id].move(vec)
     }
 
     fun clearLights() {
@@ -63,5 +81,9 @@ class Scene() {
     }
 
     fun getCamera(id: Int) = cameras[id]
+
+    companion object {
+        val defaultCamera = Camera(Vector3D(600.0, 0.0, 0.0), -PI / 2, 0.0, PI / 2, 320.0)
+    }
 
 }

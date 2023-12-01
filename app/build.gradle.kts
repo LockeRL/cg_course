@@ -36,6 +36,7 @@ android {
     kotlinOptions {
         jvmTarget = Android.KotlinOptions.jvmTarget
     }
+    namespace = "com.example.viewer"
 }
 
 dependencies {

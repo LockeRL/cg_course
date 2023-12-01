@@ -1,4 +1,69 @@
 <resources>
     <string name="app_name">Viewer</string>
     <string name="iv">Canvas</string>
+    <string name="move">Move</string>
+    <string name="x">X:</string>
+    <string name="y">Y:</string>
+    <string name="z">Z:</string>
+    <string name="zero">0</string>
+    <string name="rotate">Rotate</string>
+    <string name="objects_list">Objects</string>
+    <string name="zoom">zoom</string>
+    <string name="k">K:</string>
+    <string name="startFov">320</string>
+    <string name="object">Object</string>
+    <string name="add">add</string>
+    <string name="position">Position</string>
+    <string name="ox">OX:</string>
+    <string name="oy">OY:</string>
+    <string name="oz">OZ:</string>
+    <string name="cube">Cube</string>
+    <string name="sphere">Sphere</string>
+    <string name="plane">Plane</string>
+    <string name="prism">Prism</string>
+    <string name="pyramid">Pyramid</string>
+    <string name="light">Light</string>
+    <string name="camera">Camera</string>
+    <string name="operations">Operations</string>
+    <string name="clear_objects">Clear objects</string>
+    <string name="delete_object">delete object</string>
+    <string name="material">Material</string>
+    <string name="red">Red:</string>
+    <string name="green">Green:</string>
+    <string name="blue">Blue</string>
+    <string name="color">Color</string>
+    <string name="ambient">Ambient:</string>
+    <string name="diffuse">Diffuse:</string>
+    <string name="specular">Specular:</string>
+    <string name="reflect">Reflect:</string>
+    <string name="attributes">Attributes</string>
+    <string name="radius">Radius:</string>
+    <string name="one">1</string>
+    <string name="defaultSize">400</string>
+    <string name="maxColor">255</string>
+    <string name="height">Height:</string>
+    <string name="width">Width:</string>
+    <string name="length">Length:</string>
+    <string name="vertexes">Vertexes:</string>
+    <string name="defaultVertNum">6</string>
+    <string name="zoom_label">Zoom:</string>
+    <string name="defaultZoom">320</string>
+    <string name="xangle">XAngle:</string>
+    <string name="yangle">YAngle:</string>
+    <string name="zangle">ZAngle:</string>
+    <string name="defaultXAngle">-90</string>
+    <string name="defaultZAngle">90</string>
+    <string name="selected">Selected:</string>
+    <string name="defaultSelectedItem">Camera 1</string>
+    <string name="main_camera">Main camera:</string>
+    <string name="defaultLightPos">800</string>
+    <string-array name="objects_array">
+        <item>Sphere</item>
+        <item>Cube</item>
+        <item>Plane</item>
+        <item>Prism</item>
+        <item>Pyramid</item>
+        <item>Light</item>
+        <item>Camera</item>
+    </string-array>
 </resources>

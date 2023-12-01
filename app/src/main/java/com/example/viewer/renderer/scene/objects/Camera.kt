@@ -42,25 +42,26 @@ class Camera(
         projPlaneDist = dist
     }
 
-    fun move(vec: Vector3D) {
-        position = position + rotateVec(vec)
+    override fun move(vec: Vector3D) {
+        val (x, y, z) = vec
+        position = position + vec
     }
 
-    fun rotate(x: Double = 0.0, y: Double = 0.0, z: Double = 0.0) {
-        if (abs(x) > EPS) {
-            alX += x
+    override fun rotate(ang: Vector3D) {
+        if (abs(ang.x) > EPS) {
+            alX += ang.x
             sinAlX = sin(alX)
             cosAlX = cos(alX)
         }
 
-        if (abs(y) > EPS) {
-            alY += y
+        if (abs(ang.y) > EPS) {
+            alY += ang.y
             sinAlY = sin(alY)
             cosAlY = cos(alY)
         }
 
-        if (abs(z) > EPS) {
-            alZ += z
+        if (abs(ang.z) > EPS) {
+            alZ += ang.z
             sinAlZ = sin(alZ)
             cosAlZ = cos(alZ)
         }

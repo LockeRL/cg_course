@@ -15,7 +15,14 @@ abstract class BaseComplexFigure(
 
     val parts by lazy { createFigure() }
 
-    abstract fun update()
+    override fun rotate(ang: Vector3D) {
+        parts.forEach { it.rotate(ang, position) }
+    }
+
+    override fun move(vec: Vector3D) {
+        position = position + vec
+        parts.forEach { it.move(vec) }
+    }
 
     protected abstract fun createFigure(): List<BasePrimitive>
 
@@ -27,8 +34,8 @@ abstract class BaseComplexFigure(
         color: MaterialColor,
         material: Material
     ) = listOf(
-        Triangle(leftBot, rightBot, leftTop, color, material),
-        Triangle(rightTop, rightBot, leftTop, color, material)
+        Triangle(leftBot.copy(), rightBot.copy(), leftTop.copy(), color, material),
+        Triangle(rightTop.copy(), rightBot.copy(), leftTop.copy(), color, material)
     )
 
     protected fun circlePoints(center: Vector3D, rad: Double, n: Int): List<Vector3D> {
@@ -52,9 +59,9 @@ abstract class BaseComplexFigure(
         val n = points.size
         for (i in 0 until n) {
             triangles += Triangle(
-                points[i],
-                points[(i + 1) % n],
-                center,
+                points[i].copy(),
+                points[(i + 1) % n].copy(),
+                center.copy(),
                 color,
                 material
             )
